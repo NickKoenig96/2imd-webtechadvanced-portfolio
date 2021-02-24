@@ -1,70 +1,135 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-.container{
+.back {
+    background-image: url(images/background2.jpg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 20em;
     height: 40em;
-    background-size: 100%;
-    background-position: bottom;
-    background-image: url(images/background.jpg);
-    background-color: white;
-    display: grid;
-    grid-template-rows: 20% 70% 20% ;
-}
- 
     
-.header{
+}
+
+.container {
+    width: 20em;
+    height: 40em;
+    display: grid;
+    grid-template-rows: 20% 70% 20%;
+}
+
+.header {
     background-color: black;
     color: white;
     text-align: center;
     padding: 0.1em;
 }
 
-h1{
+h1 {
     font-size: 2em;
     letter-spacing: 0.3em;
 }
 
-h2{
+h2 {
     font-size: small;
     font-weight: lighter;
     letter-spacing: 0.2em;
 }
 
-.QR{
+.QR {
     display: grid;
     align-items: center;
     justify-items: center;
 }
 
-.QR img{
+.QR img {
     width: 10em;
     display: grid;
     align-items: center;
     justify-items: center;
-
 }
 
-.info{
-    color: white;
+.info {
+    color: black;
     display: grid;
     grid-template-columns: 10em 10em;
     grid-template-rows: 25% 25%;
-   
-    
 }
 
-
-.info p{
-    border: 1px solid white;
+.info p {
+    border: 2px solid black;
     text-align: center;
     margin: 0;
     padding: 0.3em;
-
+    font-weight: bold;
 }
 
-.price{
+.price {
     width: 20em;
 }
 
+.test {
+    display: none;
+}
+
+@media(min-width:40em) {
+    .back {
+        width: 41em ;
+        height: 21em ;
+        padding: 0.5em;
+        margin: 1em;
+        
+    }
+    .container {
+        width: 40em;
+        height: 20em;
+        grid-template-columns: 8fr 4fr;
+        grid-template-rows: 67% 40%  1% ;
+        border: 1px solid black;
+
+
+    }
+    .header {
+        background-color: transparent;
+        display: grid;
+        grid-template-rows: 2;
+        color: black;
+    }
+    .QR {
+        border: 1px solid black;
+            grid-row: 1 /span 3;  
+            grid-column: 2;
+            height: 93%;
+
+
+    }
+    .info {
+        grid-row: 2;
+        grid-template-rows: 55% 20%;
+        grid-template-columns: 33% 33% 34%;
+    }
+    .info p {
+        padding-top: 15%;
+    }
+    .price {
+        width: 100%;
+    }
+    .test {
+        display: block;
+        grid-column: 1 / span 3;
+    }
+    .test p {
+        padding: 0.5em;
+    }
+    h1 {
+        font-size: 3em;
+        grid-row-start: 2;
+        grid-column: 1;
+        margin-top: 1em;
+    }
+    h2 {
+        grid-column: 1;
+        grid-row-start: 2;
+    }
+}
