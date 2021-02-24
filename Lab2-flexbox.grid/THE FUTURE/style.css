@@ -1,0 +1,38 @@
+*{
+    box-sizing: border-box;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 50%;
+  grid-template-rows: 10fr ;
+  gap: 0.3em;
+  margin: 1em;
+}
+
+div .card{
+    font-weight: bold; 
+    text-align: center;
+
+}
+
+
+
+div .homework{
+    background-color: mediumvioletred;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+div .broken{
+    background-color: darkturquoise;
+}
+
+div .cloud{
+    background-color: gold;
+}
+
+
+}
+
