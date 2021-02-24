@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    width: 20em;
+    background-size: 100%;
+    background-image: url(images/background.jpg);
+}
+    
+    
+    
+.header{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 0.1em;
+}
+
+h1{
+    font-size: 2em;
+    letter-spacing: 0.3em;
+}
+
+h2{
+    font-size: small;
+    font-weight: lighter;
+    letter-spacing: 0.2em;
+}
+
+.QR img{
+    width: 10em;
+}
+
+.info{
+    color: white;
+}
+
+.info p{
+    border: 1px solid black;
+
+}
