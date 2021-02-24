@@ -7,7 +7,7 @@
   grid-template-columns: 50%;
   grid-template-rows: 10fr ;
   gap: 0.3em;
-  margin: 1em;
+  margin: 0.5em;
 }
 
 div .card{
@@ -42,6 +42,12 @@ div .cloud{
     .container{
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    div .card{
+        display: grid;
+        align-items: center;
+        justify-items: center;
     }
 
     div .broken{
