@@ -4,11 +4,15 @@
 
 .container{
     width: 20em;
+    height: 40em;
     background-size: 100%;
+    background-position: bottom;
     background-image: url(images/background.jpg);
+    background-color: white;
+    display: grid;
+    grid-template-rows: 20% 70% 20% ;
 }
-    
-    
+ 
     
 .header{
     background-color: black;
@@ -28,15 +32,39 @@ h2{
     letter-spacing: 0.2em;
 }
 
+.QR{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
 .QR img{
     width: 10em;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
 }
 
 .info{
     color: white;
+    display: grid;
+    grid-template-columns: 10em 10em;
+    grid-template-rows: 25% 25%;
+   
+    
 }
+
 
 .info p{
-    border: 1px solid black;
+    border: 1px solid white;
+    text-align: center;
+    margin: 0;
+    padding: 0.3em;
 
 }
+
+.price{
+    width: 20em;
+}
+
