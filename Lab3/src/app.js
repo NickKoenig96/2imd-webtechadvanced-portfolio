@@ -21,8 +21,8 @@ class Note {
     }
   
     add() {
-      // HINT🤩
-      // this function should append the note to the screen somehow
+      
+      // append the note to the screen
       let task = this.element;
       console.log(task);
       document.querySelector('#taskList').prepend(task);
@@ -46,6 +46,15 @@ class Note {
     remove() {
       let removeTask = document.querySelector(`#taskList`);
       removeTask.removeChild(this)
+
+      let TasksArray = JSON.parse(localStorage.getItem(`TaskData`));
+      let title = this.querySelector(`p`).innerHTML;
+      console.log(` remove ${title}`);
+      let ArrayIndex = TasksArray.indexOf(title); 
+      TasksArray.splice(ArrayIndex, 1); 
+      localStorage.setItem(`TaskData`, JSON.stringify(TasksArray));  
+
+      
 
 
 
