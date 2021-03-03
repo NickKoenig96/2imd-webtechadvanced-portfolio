@@ -1,13 +1,17 @@
+
+
 class Note {
     constructor(title) {
       this.title = title;
-      // HINT🤩 this.element = this.createElement(title);
+       this.title = this.createElement("H1");
+      
+
     }
   
     createElement(title) {
       let newNote = document.createElement("li");
   
-      // HINT🤩 newNote.addEventListener('click', this.remove.bind(newNote));
+      newNote.addEventListener('click', this.remove.bind(newNote));
   
       return newNote;
     }
@@ -37,8 +41,8 @@ class Note {
   
       // HINT🤩
       // pressing the enter key in the text field triggers the createNote function
-      // this.txtTodo = ???
-      // this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
+      this.txtTodo = document.querySelector("#taskInput");
+      this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
       // read up on .bind() -> we need to pass the current meaning of this to the eventListener
       // when the app loads, we can show previously saved noted from localstorage
       // this.loadNotesFromStorage();
@@ -50,6 +54,15 @@ class Note {
     }
   
     createNote(e) {
+      if(e.key === "Enter"){
+       // this.reset();
+
+        e.preventDefault();
+        console.log(e.key);
+
+      }
+
+
       // this function should create a new note by using the Note() class
       // HINT🤩
       // note.add();
