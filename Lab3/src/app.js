@@ -10,9 +10,12 @@ class Note {
   
     createElement(title) {
       let newNote = document.createElement('li');
+      newNote.classList.add(`task`);
   
-      //newNote.addEventListener('click', this.remove.bind(newNote));
       newNote.innerHTML = `<p>${title}</p>`;
+
+      newNote.addEventListener('click', this.remove.bind(newNote));
+
   
       return newNote;
     }
@@ -32,9 +35,14 @@ class Note {
     }
   
     remove() {
+      let removeTask = document.querySelector(`#taskList`);
+      removeTask.removeChild(this)
+
+
+
+ 
       // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
       // in this function, 'this' will refer to the current note element
-      // .removeChild(this)
       // remove the item from screen and from localstorage
     }
   }
