@@ -32,6 +32,15 @@ class Note {
       // HINT🤩
       // localStorage only supports strings, not arrays
       // if you want to store arrays, look at JSON.parse and JSON.stringify
+
+      let TaskData = JSON.parse(localStorage.getItem(`TaskData`));
+     if(TaskData == null){
+        TaskData = [];
+      }
+      
+      TaskData.push(this.title);
+      localStorage.setItem(`TaskData`, JSON.stringify(TaskData));
+
     }
   
     remove() {
@@ -66,6 +75,10 @@ class Note {
     loadNotesFromStorage() {
       // HINT🤩
       // load all notes from storage here and add them to the screen
+
+      
+
+
     }
   
     createNote(e) {
@@ -84,6 +97,8 @@ class Note {
 
         console.log(`test ${note}`)
 
+        note.saveToStorage();
+
 
 
         //console.log(addTitleNote);
@@ -98,11 +113,12 @@ class Note {
 
 
 
+
+
       // this function should create a new note by using the Note() class
       // HINT🤩
 
      
-      // note.saveToStorage();
 
 
       // clear the text field with .reset in this class
