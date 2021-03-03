@@ -55,10 +55,12 @@ class Note {
   
     createNote(e) {
       if(e.key === "Enter"){
-       // this.reset();
+
+       this.reset();
 
         e.preventDefault();
-        console.log(e.key);
+
+        //console.log(e.key);
 
       }
 
@@ -72,7 +74,7 @@ class Note {
     }
   
     reset() {
-      // this function should reset the form / clear the text field
+      this.txtTodo.value = "";
     }
   }
   
