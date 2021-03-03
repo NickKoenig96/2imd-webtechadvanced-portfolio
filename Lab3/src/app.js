@@ -3,15 +3,16 @@
 class Note {
     constructor(title) {
       this.title = title;
-       this.title = this.createElement("H1");
+       this.element = this.createElement(title);
       
 
     }
   
     createElement(title) {
-      let newNote = document.createElement("li");
+      let newNote = document.createElement('li');
   
-      newNote.addEventListener('click', this.remove.bind(newNote));
+      //newNote.addEventListener('click', this.remove.bind(newNote));
+      newNote.innerHTML = `<p>${title}</p>`;
   
       return newNote;
     }
@@ -19,6 +20,9 @@ class Note {
     add() {
       // HINT🤩
       // this function should append the note to the screen somehow
+      let task = this.element;
+      console.log(task);
+      document.querySelector('#taskList').prepend(task);
     }
   
     saveToStorage() {
@@ -46,6 +50,9 @@ class Note {
       // read up on .bind() -> we need to pass the current meaning of this to the eventListener
       // when the app loads, we can show previously saved noted from localstorage
       // this.loadNotesFromStorage();
+
+
+      
     }
   
     loadNotesFromStorage() {
@@ -54,21 +61,42 @@ class Note {
     }
   
     createNote(e) {
+
       if(e.key === "Enter"){
-
-       this.reset();
-
         e.preventDefault();
 
+        console.log(this.txtTodo.value);
+
+       
+
+
+        let addTitleNote = document.querySelector("#taskInput").value;
+        let note = new Note(addTitleNote);
+        note.add();
+
+        console.log(`test ${note}`)
+
+
+
+        //console.log(addTitleNote);
+        
+        //console.log(note);
+
         //console.log(e.key);
+        this.reset();
 
       }
 
 
+
+
       // this function should create a new note by using the Note() class
       // HINT🤩
-      // note.add();
+
+     
       // note.saveToStorage();
+
+
       // clear the text field with .reset in this class
       // if (e.key === "Enter")
     }
