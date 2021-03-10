@@ -1,6 +1,16 @@
 class App {
     constructor() {
-        this.Start();
+
+        let weatherStorage = JSON.parse(localStorage.getItem('weatherStorage'));
+
+        if(weatherStorage === null){
+            this.Start();
+        }
+        else{
+           this.showAdLocalStorage()
+        }
+
+        
     }
 
 
@@ -11,7 +21,6 @@ class App {
             let lat = position.coords.latitude;
             let lng = position.coords.longitude;
 
-            console.log(lat + lng);
 
             this.getWeather(lat, lng);
         });
@@ -22,18 +31,25 @@ class App {
         let key = 'e7dfca2a9d5e817941782d9872085b04';
         //let url = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${key}&units=metric`;
         let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${key}&units=metric`;
-        console.log(url);
         fetch(url)
             .then((response) => {
                 return response.json();
             })
             .then((json) => {
-                console.log(json)
+                //console.log(json)
 
                 let temperature = json.current.temp;
-                console.log(temperature);
 
                 this.showAd(temperature);
+
+
+                let weatherStorage = {
+                    'temp' : temperature,
+                    'timestamp' : Date.now()
+                };
+
+                this.setLocalStorage(weatherStorage);
+                
 
             })
 
@@ -41,6 +57,19 @@ class App {
 
     showAd(temperature){
         document.querySelector('#temp').innerHTML = temperature;
+    }
+
+    setLocalStorage(weatherStorage){
+        let weatherData = localStorage.setItem('weatherStorage', JSON.stringify(weatherStorage));
+
+        this.showAdLocalStorage(weatherData);
+    }
+
+    showAdLocalStorage(weatherData){
+        document.querySelector('#temp').innerHTML = weatherData;
+        console.log(weatherData)
+
+
     }
 
 
