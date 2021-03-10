@@ -3,7 +3,7 @@ class App {
 
         let weatherStorage = JSON.parse(localStorage.getItem('weatherStorage'));
 
-        if(weatherStorage === null){
+        if(weatherStorage === null || Date.now() === weatherStorage.reloadstamp){
             this.Start();
         }
         else{
@@ -42,13 +42,20 @@ class App {
 
                 this.showAd(temperature);
 
+             
+                let reloadstamp = new Date();
+                reloadstamp.setHours(reloadstamp.getHours()+1);
+              
+
+
 
                 let weatherStorage = {
                     'temp' : temperature,
-                    'timestamp' : Date.now()
+                    'reloadstamp' : reloadstamp
                 };
 
                 this.setLocalStorage(weatherStorage);
+                console.log(weatherStorage)
                 
 
             })
@@ -60,16 +67,15 @@ class App {
     }
 
     setLocalStorage(weatherStorage){
-        let weatherData = localStorage.setItem('weatherStorage', JSON.stringify(weatherStorage));
+        localStorage.setItem('weatherStorage', JSON.stringify(weatherStorage));
 
-        this.showAdLocalStorage(weatherData);
     }
 
-    showAdLocalStorage(weatherData){
-        document.querySelector('#temp').innerHTML = weatherData;
+    showAdLocalStorage(){
+
+        let weatherData = JSON.parse(localStorage.getItem('weatherStorage'));
+        document.querySelector('#temp').innerHTML = weatherData.temp;
         console.log(weatherData)
-
-
     }
 
 
