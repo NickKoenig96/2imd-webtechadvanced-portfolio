@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+#article {
+    width: 300px;
+    height: 600px;
+    padding: 0.5em;
+    background-size: cover;
+}
+
+h1, h2 {
+    margin-top: 2em;
+}
+
+h1, h2, div {
+    color: black;
+    background-color: white;
+    opacity: 0.6;
+    text-align: center;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 2em;
+    color: black;
+    font-weight: bolder;
+}
+
+div {
+    padding: 1em;
+    margin-top: 3.5em;
+}

@@ -3,19 +3,15 @@ class App {
 
         let weatherStorage = JSON.parse(localStorage.getItem('weatherStorage'));
 
-
-        if(weatherStorage === null || Date.now() === weatherStorage.reloadstamp){
+        if (weatherStorage === null || Date.now() === weatherStorage.reloadstamp) {
             this.Start();
         }
-        else{
-           this.showAdLocalStorage();
-           this.showActivityLocalStorage();
+        else {
+            this.showAdLocalStorage();
+            this.showActivityLocalStorage();
         }
 
-        
     }
-
-
 
     Start() {
 
@@ -31,7 +27,6 @@ class App {
 
     getWeather(lat, lng) {
         let key = 'e7dfca2a9d5e817941782d9872085b04';
-        //let url = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${key}&units=metric`;
         let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${key}&units=metric`;
         fetch(url)
             .then((response) => {
@@ -39,56 +34,59 @@ class App {
             })
             .then((json) => {
 
+                console.log(json);
+                let forecast = json.current['weather'][0]['description'];
+                console.log(forecast);
                 let temperature = json.current.temp;
 
-                this.showAd(temperature);
+                this.showAd(temperature, forecast);
                 this.getActivity(temperature);
 
-             
                 let reloadstamp = new Date();
-                reloadstamp.setHours(reloadstamp.getHours()+1);
-              
-
-
+                reloadstamp.setHours(reloadstamp.getHours() + 1);
 
                 let weatherStorage = {
-                    'temp' : temperature,
-                    'reloadstamp' : reloadstamp
+                    'temp': temperature,
+                    'forecast': forecast,
+                    'reloadstamp': reloadstamp
                 };
 
                 this.setLocalStorage(weatherStorage);
-                
 
             })
-
     }
 
-    showAd(temperature){
+    showAd(temperature, forecast) {
         document.querySelector('#temp').innerHTML = temperature;
+        document.querySelector('#forecast').innerHTML = forecast;
 
-        
     }
 
-    setLocalStorage(weatherStorage){
+    setLocalStorage(weatherStorage) {
         localStorage.setItem('weatherStorage', JSON.stringify(weatherStorage));
 
     }
 
-    showAdLocalStorage(){
+    showAdLocalStorage() {
 
         let weatherData = JSON.parse(localStorage.getItem('weatherStorage'));
         document.querySelector('#temp').innerHTML = weatherData.temp;
+        document.querySelector('#forecast').innerHTML = weatherData.forecast;
+
     }
 
-
-    getActivity(temperature){
+    getActivity(temperature) {
         let type = '';
-        if(temperature >= 17){
-             type = 'recreational'
-        }else if (temperature >= 12) {
-             type ='busywork'
+        let image = ''
+        if (temperature >= 17) {
+            type = 'social'
+            image = 'https://images.unsplash.com/photo-1540634759006-203f597e1a34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80'
+        } else if (temperature >= 12) {
+            type = 'music'
+            image = 'https://images.unsplash.com/photo-1446185250204-f94591f7d702?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80'
         } else {
-             type = 'cooking'
+            type = 'cooking'
+            image = 'https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80'
         }
 
         let url = `http://www.boredapi.com/api/activity?type=${type}`;
@@ -99,35 +97,35 @@ class App {
             .then((json) => {
                 let activity = json['activity'];
 
-                this.showActivity(activity);
+                this.showActivity(activity, image);
+
 
 
                 let activityStorage = {
-                    'activity' : activity
+                    'activity': activity,
+                    'image': image
                 };
 
                 this.setLocalStorageActivity(activityStorage);
             })
-
     }
 
-    showActivity(activity){
+    showActivity(activity, image) {
         document.querySelector('#activity').innerHTML = activity;
-
-
+        document.querySelector('#article').style.backgroundImage = `url(${image})`;
     }
 
-    setLocalStorageActivity(activityStorage){
+    setLocalStorageActivity(activityStorage) {
         localStorage.setItem('activityStorage', JSON.stringify(activityStorage));
 
     }
 
-    showActivityLocalStorage(){
+    showActivityLocalStorage() {
         let activityStorage = JSON.parse(localStorage.getItem('activityStorage'));
         document.querySelector('#activity').innerHTML = activityStorage.activity;
+        document.querySelector('#article').style.backgroundImage = `url(${activityStorage.image})`;
+
     }
-
-
 
 }
 
