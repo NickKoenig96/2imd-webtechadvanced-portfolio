@@ -5,6 +5,7 @@ class App {
 
         if(weatherStorage === null || Date.now() === weatherStorage.reloadstamp){
             this.Start();
+            //this.getActivity();
         }
         else{
            this.showAdLocalStorage()
@@ -41,6 +42,7 @@ class App {
                 let temperature = json.current.temp;
 
                 this.showAd(temperature);
+                this.getActivity(temperature);
 
              
                 let reloadstamp = new Date();
@@ -64,6 +66,8 @@ class App {
 
     showAd(temperature){
         document.querySelector('#temp').innerHTML = temperature;
+
+        
     }
 
     setLocalStorage(weatherStorage){
@@ -77,6 +81,51 @@ class App {
         document.querySelector('#temp').innerHTML = weatherData.temp;
         console.log(weatherData)
     }
+
+
+    getActivity(temperature){
+        let type = '';
+        if(temperature >= 17){
+             type = 'recreational'
+        }else if (temperature >= 12) {
+             type ='busywork'
+        } else {
+             type = 'cooking'
+        }
+
+        let url = `http://www.boredapi.com/api/activity?type=${type}`;
+        fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((json) => {
+                console.log(json)
+                let activity = json['activity'];
+                console.log(activity);
+
+                this.showActivity(activity);
+
+
+                let activityStorage = {
+                    'temp' : activity
+                };
+
+                this.setLocalStorageActivity(activityStorage);
+            })
+
+    }
+
+    showActivity(activity){
+        document.querySelector('#activity').innerHTML = activity;
+
+
+    }
+
+    setLocalStorageActivity(activityStorage){
+        localStorage.setItem('activityStorage', JSON.stringify(activityStorage));
+
+    }
+
 
 
 }
