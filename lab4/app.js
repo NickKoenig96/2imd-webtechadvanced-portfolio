@@ -89,7 +89,7 @@ class App {
             image = 'https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80'
         }
 
-        let url = `http://www.boredapi.com/api/activity?type=${type}`;
+        let url = `https://www.boredapi.com/api/activity?type=${type}`;
         fetch(url)
             .then((response) => {
                 return response.json();
