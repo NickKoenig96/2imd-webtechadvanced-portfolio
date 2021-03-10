@@ -3,12 +3,13 @@ class App {
 
         let weatherStorage = JSON.parse(localStorage.getItem('weatherStorage'));
 
+
         if(weatherStorage === null || Date.now() === weatherStorage.reloadstamp){
             this.Start();
-            //this.getActivity();
         }
         else{
-           this.showAdLocalStorage()
+           this.showAdLocalStorage();
+           this.showActivityLocalStorage();
         }
 
         
@@ -37,7 +38,6 @@ class App {
                 return response.json();
             })
             .then((json) => {
-                //console.log(json)
 
                 let temperature = json.current.temp;
 
@@ -57,7 +57,6 @@ class App {
                 };
 
                 this.setLocalStorage(weatherStorage);
-                console.log(weatherStorage)
                 
 
             })
@@ -79,7 +78,6 @@ class App {
 
         let weatherData = JSON.parse(localStorage.getItem('weatherStorage'));
         document.querySelector('#temp').innerHTML = weatherData.temp;
-        console.log(weatherData)
     }
 
 
@@ -99,15 +97,13 @@ class App {
                 return response.json();
             })
             .then((json) => {
-                console.log(json)
                 let activity = json['activity'];
-                console.log(activity);
 
                 this.showActivity(activity);
 
 
                 let activityStorage = {
-                    'temp' : activity
+                    'activity' : activity
                 };
 
                 this.setLocalStorageActivity(activityStorage);
@@ -124,6 +120,11 @@ class App {
     setLocalStorageActivity(activityStorage){
         localStorage.setItem('activityStorage', JSON.stringify(activityStorage));
 
+    }
+
+    showActivityLocalStorage(){
+        let activityStorage = JSON.parse(localStorage.getItem('activityStorage'));
+        document.querySelector('#activity').innerHTML = activityStorage.activity;
     }
 
 
