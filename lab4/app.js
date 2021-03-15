@@ -2,8 +2,18 @@ class App {
     constructor() {
 
         let weatherStorage = JSON.parse(localStorage.getItem('weatherStorage'));
+        console.log(weatherStorage);
+        console.log(weatherStorage.dateTime);
+        console.log(weatherStorage.dateTimePlusOne);
 
-        if (weatherStorage === null || Date.now() === weatherStorage.reloadstamp) {
+        if( weatherStorage.dateTime >= weatherStorage.dateTimePlusOne){
+            console.log('yes')
+        }else{
+            console.log('no')
+        }
+
+
+        if (weatherStorage === null || weatherStorage.dateTime > weatherStorage.dateTimePlusOne) {
             this.Start();
         }
         else {
@@ -42,13 +52,23 @@ class App {
                 this.showAd(temperature, forecast);
                 this.getActivity(temperature);
 
-                let reloadstamp = new Date();
-                reloadstamp.setHours(reloadstamp.getHours() + 1);
+                var today = new Date();
+                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date + ' ' + time;
+                console.log(dateTime);
+
+                var todayPlusOne = new Date();
+                var datePlusOne = todayPlusOne.getFullYear() + '-' + (todayPlusOne.getMonth() + 1) + '-' + todayPlusOne.getDate();
+                var timePlusOne = today.getHours()+1 + ":" + todayPlusOne.getMinutes() + ":" + todayPlusOne.getSeconds();
+                var dateTimePlusOne = datePlusOne + ' ' + timePlusOne;
+                console.log(dateTimePlusOne);
 
                 let weatherStorage = {
                     'temp': temperature,
                     'forecast': forecast,
-                    'reloadstamp': reloadstamp
+                    'dateTime': dateTime,
+                    'dateTimePlusOne': dateTimePlusOne
                 };
 
                 this.setLocalStorage(weatherStorage);
