@@ -155,7 +155,7 @@ function getUserByName(req, res) {
     if (!err) {
         res.json({
             "status": "success",
-            "message": docs,
+            "message": docs
         })
     } else {
         res.json({
