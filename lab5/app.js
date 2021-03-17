@@ -1,11 +1,10 @@
+const mongoose = require('mongoose');
 const express = require('express')
 const app = express()
 const port = 3000;
 const routerMessages = require("./routers/api/v1/messages");
 
-/*app.get('/', (req, res) => {
-  res.send('Hello World!')
-})*/
+mongoose.connect('mongodb://localhost:27017/lab5',{useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use("/api/v1/messages", routerMessages);
 

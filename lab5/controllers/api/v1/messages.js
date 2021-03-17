@@ -1,8 +1,37 @@
+//const Message = require("../../../models/messages");
+
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const messageSchema = new mongoose.Schema({
+    user: String,
+    message: String,
+
+});
+
+const Message = mongoose.model('Message', messageSchema);
+
+
 function getAllM (req, res){
+   /* let m = new Message();
+    m.user = 'test',
+    m.message = 'wekrt dit ?'
+
+    m.save();
+
+
     res.json({
         status: "succes",
         message: "GETTING messages",
-    });
+    });*/
+
+    Message.find({}, (err, docs) => {
+        if(!err) {
+            res.json({
+                "status": "success",
+                "message": docs
+            })
+        }
+    })
 } 
 
 function getOneM (req, res){
