@@ -6,31 +6,46 @@
     width: 300px;
     height: 600px;
     padding: 0.5em;
-    background-size: cover;
+    border: 5px solid cornflowerblue;
+    background-image: url(https://i5.walmartimages.com/dfw/4ff9c6c9-1a20/k2-_61af72f3-74f7-48c1-b5d1-60254009218f.v1.jpg?odnWidth=320&odnHeight=140&odnBg=ffffff);
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+
+img {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1em;
+}
+
+.logo {
+    width: 150px;
 }
 
 h1, h2 {
-    margin-top: 2em;
-}
-
-h1, h2, div {
-    color: black;
-    background-color: white;
-    opacity: 0.6;
+    color: white;
+    background-color: cornflowerblue;
     text-align: center;
+    padding: 0.01em;
 }
 
 h3 {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 p {
-    font-size: 2em;
-    color: black;
+    font-size: 1.5em;
+    color: white;
     font-weight: bolder;
 }
 
-div {
-    padding: 1em;
-    margin-top: 3.5em;
+div p {
+    padding: 0.1em;
+    margin-top: 7em;
+    color: cornflowerblue;
+    font-size: 1.6em;
+    text-align: center;
 }

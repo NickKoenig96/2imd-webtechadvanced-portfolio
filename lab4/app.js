@@ -2,15 +2,15 @@ class App {
     constructor() {
 
         let weatherStorage = JSON.parse(localStorage.getItem('weatherStorage'));
-        console.log(weatherStorage);
-        console.log(weatherStorage.dateTime);
-        console.log(weatherStorage.dateTimePlusOne);
-
-        if( weatherStorage.dateTime >= weatherStorage.dateTimePlusOne){
-            console.log('yes')
-        }else{
-            console.log('no')
-        }
+        /* console.log(weatherStorage);
+         console.log(weatherStorage.dateTime);
+         console.log(weatherStorage.dateTimePlusOne);
+ 
+         if( weatherStorage.dateTime >= weatherStorage.dateTimePlusOne){
+             console.log('yes')
+         }else{
+             console.log('no')
+         }*/
 
 
         if (weatherStorage === null || weatherStorage.dateTime > weatherStorage.dateTimePlusOne) {
@@ -45,7 +45,7 @@ class App {
             .then((json) => {
 
                 console.log(json);
-                let forecast = json.current['weather'][0]['description'];
+                let forecast = json.current['weather'][0]['main'];
                 console.log(forecast);
                 let temperature = json.current.temp;
 
@@ -60,7 +60,7 @@ class App {
 
                 var todayPlusOne = new Date();
                 var datePlusOne = todayPlusOne.getFullYear() + '-' + (todayPlusOne.getMonth() + 1) + '-' + todayPlusOne.getDate();
-                var timePlusOne = today.getHours()+1 + ":" + todayPlusOne.getMinutes() + ":" + todayPlusOne.getSeconds();
+                var timePlusOne = today.getHours() + 1 + ":" + todayPlusOne.getMinutes() + ":" + todayPlusOne.getSeconds();
                 var dateTimePlusOne = datePlusOne + ' ' + timePlusOne;
                 console.log(dateTimePlusOne);
 
@@ -100,13 +100,10 @@ class App {
         let image = ''
         if (temperature >= 17) {
             type = 'social'
-            image = 'https://images.unsplash.com/photo-1540634759006-203f597e1a34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=724&q=80'
         } else if (temperature >= 12) {
             type = 'music'
-            image = 'https://images.unsplash.com/photo-1446185250204-f94591f7d702?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80'
         } else {
-            type = 'cooking'
-            image = 'https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80'
+            type = 'diy'
         }
 
         let url = `https://www.boredapi.com/api/activity?type=${type}`;
@@ -116,6 +113,11 @@ class App {
             })
             .then((json) => {
                 let activity = json['activity'];
+                console.log(activity);
+
+                if (activity === 'Create a compost pile') {
+                    activity = 'Play a video game'
+                }
 
                 this.showActivity(activity, image);
 
@@ -123,16 +125,14 @@ class App {
 
                 let activityStorage = {
                     'activity': activity,
-                    'image': image
                 };
 
                 this.setLocalStorageActivity(activityStorage);
             })
     }
 
-    showActivity(activity, image) {
+    showActivity(activity) {
         document.querySelector('#activity').innerHTML = activity;
-        document.querySelector('#article').style.backgroundImage = `url(${image})`;
     }
 
     setLocalStorageActivity(activityStorage) {
@@ -143,8 +143,6 @@ class App {
     showActivityLocalStorage() {
         let activityStorage = JSON.parse(localStorage.getItem('activityStorage'));
         document.querySelector('#activity').innerHTML = activityStorage.activity;
-        document.querySelector('#article').style.backgroundImage = `url(${activityStorage.image})`;
-
     }
 
 }
