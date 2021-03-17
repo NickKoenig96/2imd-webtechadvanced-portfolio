@@ -11,74 +11,163 @@ const messageSchema = new mongoose.Schema({
 const Message = mongoose.model('Message', messageSchema);
 
 
-function getAllM (req, res){
-   /* let m = new Message();
-    m.user = 'test',
-    m.message = 'wekrt dit ?'
+function getAllM(req, res) {
+    /* let m = new Message();
+     m.user = 'test',
+     m.message = 'wekrt dit ?'
+ 
+     m.save();
+ 
+ 
+     res.json({
+         status: "succes",
+         message: "GETTING messages",
+     });*/
 
-    m.save();
-
-
-    res.json({
-        status: "succes",
-        message: "GETTING messages",
-    });*/
-
-    Message.find({}, (err, docs) => {
-        if(!err) {
+    Message.find({}, function (err, docs) {
+        if (!err) {
             res.json({
                 "status": "success",
                 "message": docs
             })
+        } else {
+            res.json({
+                "status": "error",
+                "error": "Please provide a message"
+            })
+
         }
     })
-} 
+}
 
-function getOneM (req, res){
-    let id = req.params.id;
+function getOneM(req, res) {
+    /* let id = req.params.id;
+     res.json({
+         status: "succes",
+         message: `GETTING message with ID is ${id}`,
+     });*/
+
+    Message.find({ _id: req.params.id }, function (err, docs) {
+        if (!err) {
+            res.json({
+                "status": "success",
+                "message": docs
+            })
+        } else {
+            res.json({
+                "status": "error",
+                "error": "Please provide a message"
+            })
+        }
+    })
+
+};
+
+
+function postAllM(req, res) {
+    let m = new Message();
+    m.user = 'Pickachu',
+        m.message = 'nodejs isn’t hard, or is it?'
+
+    m.save(function (err, doc) {
+        if (!err) {
+            res.json({
+                "status": "success",
+                "message": doc
+            })
+        } else {
+            res.json({
+                "status": "error",
+                "error": "Please provide a message"
+            })
+        }
+    });
+
+    /* res.json({
+         status: "succes",
+         message: "POSTING a new message for user Pikachu",
+     });*/
+}
+
+
+function putOneM(req, res) {
+    /* let id = req.params.id;
+     res.json({
+         status: "succes",
+         message: `UPDATING a message with id is ${id}`,
+     });*/
+
+    let newMessage = 'This is an updated message'
+
+    Message.findByIdAndUpdate({ _id: req.params.id }, { text: newMessage }, function (err) {
+        if (!err) {
+            res.json({
+                "status": "success",
+                "message": newMessage,
+            })
+
+        } else {
+            res.json({
+                "status": "error",
+                "error": "Please provide a message"
+            })
+        }
+
+    })
+
+};
+
+function deleteOneM(req, res) {
+    /* let id = req.params.id;
+     res.json({
+         status: "succes",
+         message: `DELETING a message with id is ${id}`,
+     });*/
+
+    Message.findByIdAndDelete({ _id: req.params.id }, function (err) {
+
+        if (!err) {
+            res.json({
+                "status": "success",
+                "message": "DELETING a message with id is" + req.params.id,
+            })
+        } else {
+            res.json({
+                "status": "error",
+                "error": "Please provide a message"
+            })
+        }
+
+    })
+
+};
+
+function getUserByName(req, res) {
+    /*let username = req.params.username;
     res.json({
         status: "succes",
-        message: `GETTING message with ID is ${id}`,
-    });
-    
-    };
+        message: `GETTING message for username ${username}`,
+    });*/
 
 
-    function postAllM (req, res){
+    Message.find({ user: req.params.username }, function (err, docs) {
+    })
+    if (!err) {
         res.json({
-            status: "succes",
-            message: "POSTING a new message for user Pikachu",
-        });
-    } 
-
-
-    function putOneM (req, res){
-        let id = req.params.id;
+            "status": "success",
+            "message": docs,
+        })
+    } else {
         res.json({
-            status: "succes",
-            message: `UPDATING a message with id is ${id}`,
-        });
-        
-        };
+            "status": "error",
+            "error": "Please provide a username"
+        })
+    }
 
-        function deleteOneM (req, res){
-            let id = req.params.id;
-            res.json({
-                status: "succes",
-                message: `DELETING a message with id is ${id}`,
-            });
-            
-            };
 
-            function getUserByName (req, res){
-                let username = req.params.username;
-                res.json({
-                    status: "succes",
-                    message: `GETTING message for username ${username}`,
-                });
-                
-                };
-            
+
+};
+
 
 module.exports.getAllM = getAllM;
 module.exports.getOneM = getOneM;

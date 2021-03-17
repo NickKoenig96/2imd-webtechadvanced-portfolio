@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000;
 const routerMessages = require("./routers/api/v1/messages");
+//const pug = require("pug");
 
 mongoose.connect('mongodb://localhost:27017/lab5',{useNewUrlParser: true, useUnifiedTopology: true});
 
