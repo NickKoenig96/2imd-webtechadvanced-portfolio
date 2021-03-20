@@ -15,7 +15,7 @@ app.get("/",function (req, res)  {
   })
 })
 
-mongoose.connect('mongodb://localhost:27017/lab5',{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://lab5user:NXP4clCVRk3daCPX@cluster0.vikjn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use("/api/v1/messages", routerMessages);
 
