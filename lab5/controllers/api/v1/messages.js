@@ -1,4 +1,4 @@
-//const Message = require("../../../models/messages");
+/*const Message = require("../../../models/messages");*/
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -12,7 +12,7 @@ const Message = mongoose.model('Message', messageSchema);
 
 
 function getAllM(req, res) {
-    /* let m = new Message();
+    /*let m = new Message();
      m.user = 'test',
      m.message = 'wekrt dit ?'
  
@@ -24,7 +24,7 @@ function getAllM(req, res) {
          message: "GETTING messages",
      });*/
 
-    Message.find({}, function (err, docs) {
+   Message.find({}, function (err, docs) {
         if (!err) {
             res.json({
                 "status": "success",
@@ -41,13 +41,13 @@ function getAllM(req, res) {
 }
 
 function getOneM(req, res) {
-    /* let id = req.params.id;
+    let id = req.params.id;
      res.json({
          status: "succes",
          message: `GETTING message with ID is ${id}`,
-     });*/
+     });
 
-    Message.find({ _id: req.params.id }, function (err, docs) {
+   Message.find({ _id: req.params.id }, function (err, docs) {
         if (!err) {
             res.json({
                 "status": "success",
@@ -91,11 +91,11 @@ function postAllM(req, res) {
 
 
 function putOneM(req, res) {
-    /* let id = req.params.id;
+     let id = req.params.id;
      res.json({
          status: "succes",
          message: `UPDATING a message with id is ${id}`,
-     });*/
+     });
 
     let newMessage = 'This is an updated message'
 
@@ -118,11 +118,11 @@ function putOneM(req, res) {
 };
 
 function deleteOneM(req, res) {
-    /* let id = req.params.id;
+     let id = req.params.id;
      res.json({
          status: "succes",
          message: `DELETING a message with id is ${id}`,
-     });*/
+     });
 
     Message.findByIdAndDelete({ _id: req.params.id }, function (err) {
 
@@ -175,3 +175,66 @@ module.exports.postAllM = postAllM;
 module.exports.putOneM = putOneM;
 module.exports.deleteOneM = deleteOneM;
 module.exports.getUserByName = getUserByName;
+
+
+
+
+/*function getAllM (req, res){
+    res.json({
+        status: "succes",
+        message: "GETTING messages",
+    });
+} 
+
+function getOneM (req, res){
+    let id = req.params.id;
+    res.send(id);
+    res.json({
+        status: "succes",
+        message: `GETTING message with ID is ${id}`,
+    });
+
+};
+
+function postAllM (req, res){
+    res.json({
+        status: "succes",
+        message: "POSTING a new message for user Pikachu",
+    });
+} 
+
+
+function putOneM (req, res){
+    let id = req.params.id;
+    res.json({
+        status: "succes",
+        message: `UPDATING a message with id is ${id}`,
+    });
+
+    };
+
+    function deleteOneM (req, res){
+        let id = req.params.id;
+        res.json({
+            status: "succes",
+            message: `DELETING a message with id is ${id}`,
+        });
+
+        };
+
+        function getUserByName (req, res){
+            let username = req.params.username;
+            res.json({
+                status: "succes",
+                message: `GETTING message for username ${username}`,
+            });
+
+            };
+
+
+module.exports.getAllM = getAllM;
+module.exports.getOneM = getOneM;
+module.exports.postAllM = postAllM;
+module.exports.putOneM = putOneM;
+module.exports.deleteOneM = deleteOneM;
+module.exports.getUserByName = getUserByName;*/
