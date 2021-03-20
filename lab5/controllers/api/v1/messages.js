@@ -143,11 +143,11 @@ function deleteOneM(req, res) {
 };
 
 function getUserByName(req, res) {
-    /*let username = req.params.username;
+    let username = req.params.username;
     res.json({
         status: "succes",
         message: `GETTING message for username ${username}`,
-    });*/
+    });
 
 
     Message.find({ user: req.params.username }, function (err, docs) {
