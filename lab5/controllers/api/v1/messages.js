@@ -30,13 +30,13 @@ function getAllM(req, res) {
                 "status": "success",
                 "message": docs
             })
-        } else {
+        } /*else {
             res.json({
                 "status": "error",
                 "error": "Please provide a message"
             })
 
-        }
+        }*/
     })
 }
 
@@ -53,12 +53,12 @@ function getOneM(req, res) {
                 "status": "success",
                 "message": docs
             })
-        } else {
+        } /*else {
             res.json({
                 "status": "error",
                 "error": "Please provide a message"
             })
-        }
+        }*/
     })
 
 };
@@ -75,12 +75,12 @@ function postAllM(req, res) {
                 "status": "success",
                 "message": doc
             })
-        } else {
+        } /*else {
             res.json({
                 "status": "error",
                 "error": "Please provide a message"
             })
-        }
+        }*/
     });
 
     /* res.json({
@@ -91,11 +91,11 @@ function postAllM(req, res) {
 
 
 function putOneM(req, res) {
-     let id = req.params.id;
+    /* let id = req.params.id;
      res.json({
          status: "succes",
          message: `UPDATING a message with id is ${id}`,
-     });
+     });*/
 
     let newMessage = 'This is an updated message'
 
@@ -106,12 +106,12 @@ function putOneM(req, res) {
                 "message": newMessage,
             })
 
-        } else {
+        } /*else {
             res.json({
                 "status": "error",
                 "error": "Please provide a message"
             })
-        }
+        }*/
 
     })
 
@@ -131,23 +131,23 @@ function deleteOneM(req, res) {
                 "status": "success",
                 "message": "DELETING a message with id is" + req.params.id,
             })
-        } else {
+        } /*else {
             res.json({
                 "status": "error",
                 "error": "Please provide a message"
             })
-        }
+        }*/
 
     })
 
 };
 
 function getUserByName(req, res) {
-    let username = req.params.username;
+    /*let username = req.params.username;
     res.json({
         status: "succes",
         message: `GETTING message for username ${username}`,
-    });
+    });*/
 
 
     Message.find({ user: req.params.username }, function (err, docs) {
@@ -157,12 +157,12 @@ function getUserByName(req, res) {
             "status": "success",
             "message": docs
         })
-    } else {
+    } /*else {
         res.json({
             "status": "error",
             "error": "Please provide a username"
         })
-    }
+    }*/
 
 
 
