@@ -151,7 +151,7 @@ function getUserByName(req, res) {
 
 
     Message.find({ user: req.params.username }, function (err, docs) {
-    })
+  
     if (!err) {
         res.json({
             "status": "success",
@@ -164,7 +164,7 @@ function getUserByName(req, res) {
         })
     }*/
 
-
+})
 
 };
 
